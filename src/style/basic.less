@@ -1,0 +1,175 @@
+
+
+@mainColor: #4283b9 ;
+@warningColor: #eeb843;
+@errorColor: red;
+@successColor: #42b983;
+@grayColor: #eee;
+@darkColor: #333;
+
+
+@min-font-size: 10;
+@max-font-size: 80;
+
+.font-size-loop(@n, @i:@min-font-size) when (@i <= @n) {
+    .font-size-@{i} {
+        font-size: 1px * @i;
+    }
+    .font-size-loop(@n, (@i + 1));
+}
+
+.font-size-loop(@max-font-size);
+
+
+@size: small, default, large;
+@font-size-value: 10px, 14px, 18px;
+
+.font-size-iterate(@data, @i: 1) when(@i =< length(@data)) {
+    @item: extract(@data, @i);
+    @value: extract(@font-size-value, @i);
+
+    .font-size-@{item} {
+        font-size: @value;
+    }
+    .font-size-iterate(@data, (@i + 1));
+}
+
+.font-size-iterate(@size);
+
+// #region font-weight-loop
+@min-font-weight: 100;
+@max-font-weight: 700;
+
+.font-weight-loop(@n, @i: @min-font-weight) when(@i =< @n) {
+    .font-weight-@{i} {
+        font-weight: @i;
+    }
+    .font-weight-loop(@n,@i + 100);
+}
+.font-weight-loop(@max-font-weight);
+// #endregion
+
+@weight:  lighter bold bolder;
+
+.font-weight(@data, @i: 1) when(@i =< length(@data)) {
+    @item: extract(@data, @i);
+
+    .font-weight-@{item} {
+        font-weight: @item;
+    }
+    .font-weight(@data, (@i + 1));
+}
+.font-weight(@weight);
+
+
+// m - margin | p - padding
+// l - left | r - right | t - top | b -bottom | x - horizontal | y - vertical | a - all
+
+//.m-l-10		 // margin-left-10px
+//.m-y-10		// margin-vertical-10px
+//.p-x-10		// margin-horizontal-10px
+//.p-a-10		// margin-all-10px
+
+
+
+@padding-direction: t, b, l, r, x, y;
+@min-padding-value: 1;
+@max-padding-value: 80;
+
+.padding-direction-loop(@data,  @value, @i: 1) when(@i =< length(@data)) {
+    @direction: extract(@data, @i);
+
+    .p-@{direction}-@{value} when (@direction = l) {
+        padding-left: @value * 1px;
+    }
+
+    .p-@{direction}-@{value} when (@direction = r) {
+        padding-right: @value * 1px;
+    }
+
+    .p-@{direction}-@{value} when (@direction = t) {
+        padding-top: @value * 1px;
+    }
+
+    .p-@{direction}-@{value} when (@direction = b) {
+        padding-bottom: @value * 1px;
+    }
+
+    .p-@{direction}-@{value} when (@direction = x) {
+        padding: 0 @value * 1px;
+    }
+
+    .p-@{direction}-@{value} when (@direction = y) {
+        padding: @value * 1px 0;
+    }
+
+    .padding-direction-loop(@data, @value, (@i + 1));
+}
+
+.padding-loop(@n, @i: @min-padding-value) when(@i =< @n ) {
+    .p-a-@{i} {
+        padding: 1px * @i;
+    }
+
+    .padding-direction-loop(@padding-direction, @i);
+    .padding-loop(@n, (@i + 1));
+}
+
+.padding-loop(@max-padding-value);
+
+
+@margin-direction: t, b, l, r, x, y;
+@min-margin-value: 1;
+@max-margin-value: 80;
+
+.margin-direction-loop(@data,  @value, @i: 1) when(@i =< length(@data)) {
+    @direction: extract(@data, @i);
+
+    .m-@{direction}-@{value} when (@direction = l) {
+        margin-left: @value * 1px;
+    }
+
+    .m-@{direction}-@{value} when (@direction = r) {
+        margin-right: @value * 1px;
+    }
+
+    .m-@{direction}-@{value} when (@direction = t) {
+        margin-top: @value * 1px;
+    }
+
+    .m-@{direction}-@{value} when (@direction = b) {
+        margin-bottom: @value * 1px;
+    }
+
+    .m-@{direction}-@{value} when (@direction = x) {
+        margin: 0 @value * 1px;
+    }
+
+    .m-@{direction}-@{value} when (@direction = y) {
+        margin: @value * 1px 0;
+    }
+
+    .margin-direction-loop(@data, @value, (@i + 1));
+}
+
+.margin-loop(@n, @i: @min-margin-value) when(@i =< @n ) {
+    .m-a-@{i} {
+        margin: 1px * @i;
+    }
+
+    .margin-direction-loop(@margin-direction, @i);
+    .margin-loop(@n, (@i + 1));
+}
+
+.margin-loop(@max-margin-value);
+// #endregion
+
+
+
+
+
+
+
+
+
+

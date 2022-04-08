@@ -1,0 +1,115 @@
+.flex {
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.flex-nowrap {
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.flex-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+// 行模式(主轴水平排列)
+.flex-row {
+    .flex();
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-lines: single;
+}
+
+// 列模式(主轴数值排列)
+.flex-column {
+    .flex();
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -webkit-box-orient: vertical;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-lines: single;
+}
+
+// 反向行模式(主轴水平排列)
+.flex-row-reverse {
+    .flex-row();
+    -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    -webkit-box-direction: reverse;
+}
+
+// 反向列模式(主轴水平排列)
+.flex-column-reverse {
+    .flex-column();
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-box-direction: reverse;
+}
+
+// 自动填充(用与配合flex-basis填充剩余空间)
+.flex-auto {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex-basis: 0;
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+}
+
+// align-items
+@align-items-keys: start, center, end, stretch;
+@align-items-values: flex-start, center, flex-end, between, around;
+
+.flex-align-items(@data, @i: 1) when(@i =< length(@data)) {
+    @align: extract(@align-items-keys, @i);
+    @value: extract(@align-items-values, @i);
+
+    .align-items-@{align} {
+        -webkit-align-items: @value;
+        align-items: @value;
+        -webkit-box-align: @align;
+    }
+
+    .flex-align-items(@data, (@i + 1));
+}
+
+// justify-content
+@justify-content-keys: start, center, end, between, around;
+@justify-content-values: flex-start, center, flex-end, space-between,
+    space-around;
+
+.flex-justify-content(@data, @i: 1) when(@i =< length(@data)) {
+    @key: extract(@justify-content-keys, @i);
+    @value: extract(@justify-content-values, @i);
+
+    .justify-content-@{key} {
+        -webkit-justify-content: @value;
+        justify-content: @value;
+    }
+
+    .flex-justify-content(@data, (@i + 1));
+}
+
+// 遍历justify-content-keys生成样式
+.flex-justify-content(@justify-content-keys);
+
+// 遍历align-items-keys生成样式
+.flex-align-items(@align-items-keys);
+
+
