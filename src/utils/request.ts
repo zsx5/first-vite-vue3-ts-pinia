@@ -22,7 +22,7 @@ instance.interceptors.request.use(function (config) {
 
 //响应拦截
 instance.interceptors.response.use(function (response) {
-    return response.data;
+    return response?.data?.data;
 }, function (error) {
     return Promise.reject(error);
 });

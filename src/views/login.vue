@@ -22,9 +22,10 @@
     </div>
 </template>
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
 import { reactive } from 'vue'
 import { ssoLogin } from "@/api/user"
+import { usePermissionStore } from "@/store/modules/permission"
+import { useRouter} from 'vue-router'
 import md5 from "js-md5";
 
 interface ILoginForm {
@@ -32,11 +33,15 @@ interface ILoginForm {
     password: string,
 }
 
+const { setToken }  = usePermissionStore();
+console.log('usePermissionStore()', usePermissionStore())
 
 const formState: ILoginForm = reactive({
     mobile: '',
     password: '',
 })
+
+const router = useRouter();
 
 const onFinish = values => {
     console.log('Success:', values);
@@ -47,6 +52,10 @@ const onFinish = values => {
     }
     ssoLogin(params).then(res => {
         console.log(res)
+        let token = res.token.token;
+        setToken(token);
+        sessionStorage.setItem("token", JSON.stringify(token))
+        router.push('/');
     }).catch((e) => {
         console.log(e);
     })

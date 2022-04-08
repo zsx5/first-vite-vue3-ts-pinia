@@ -4,7 +4,6 @@ import Login from '@/views/login.vue'
 const constantRoutes = [
     {
         path:'/',
-        redirect: '/login',
         component:()=> import('@/views/home.vue')
     },
     {

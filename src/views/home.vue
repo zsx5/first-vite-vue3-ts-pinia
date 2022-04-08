@@ -1,9 +1,11 @@
 <template>
-<HelloWorld></HelloWorld>
+<div>111</div>
 </template>
 
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
+    import { usePermissionStore } from "@/store/modules/permission"
+    const { token } = usePermissionStore();
+    console.log("token", token)
 </script>
 
 <style lang="less">
