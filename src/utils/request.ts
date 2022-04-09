@@ -3,7 +3,7 @@ import { terrace } from "@/config/index"
 
 //创建一个新的实例以实现自定义配置
 const instance = axios.create({
-    baseURL: '/api',
+    baseURL: '',
     timeout: 1000,
 });
 
@@ -42,6 +42,7 @@ const http = {
             method: 'post',
             data: params,
             headers: {
+                'Content-Type': 'application/json',
                 ...headers,
             }
         })
