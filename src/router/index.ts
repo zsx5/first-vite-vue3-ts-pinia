@@ -1,10 +1,18 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import basicLayout from "@/layout/basicLayout/index.vue"
 import Login from '@/views/login.vue'
 
 const constantRoutes = [
     {
         path:'/',
-        component:()=> import('@/views/home.vue')
+        component: basicLayout,
+        redirect: 'web',
+        children: [
+            {
+                path:'/web',
+                component: ()=> import("@/views/home.vue")
+            }
+        ]
     },
     {
         path:'/login',
